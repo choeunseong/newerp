@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="code">
+	<!-- 공통코드 조회 -->
+	<select id="codeSearch" parameterType="comm.CommVO" resultType="comm.CommVO">
+		{ call SP_S_code_search(#{sys_scd}, #{tp_cd}, #{searchKeyword}, #{currentPerPage}, #{startIndex}) }
+	</select>
+	
+	<!-- 공통코드 cnt -->
+	<select id="codeCnt" parameterType="comm.CommVO" resultType="int">
+		{ call SP_S_code_search_cnt(#{sys_scd}, #{tp_cd}, #{searchKeyword}) }
+	</select>
+	
+	<!-- 업무구분리스트 -->
+	<select id="taskList" resultType="comm.CommVO"	>
+		SELECT cd_id, cd_nm FROM comm_cmncdm where sys_scd = '00' and tp_cd = '9000'
+	</select>	
+	
+	<!-- 유형구분리스트 -->
+	<select id="typeList" parameterType="java.lang.String" resultType="comm.CommVO"	>
+		SELECT * FROM comm_cmncgm WHERE sys_scd = #{cd_id}
+	</select>	
+	
+	<!-- 공통코드 등록 -->
+	<insert id="codeInsert" parameterType="comm.CommVO">
+		INSERT INTO comm_cmncdm(sys_scd, tp_cd, cd_id, cd_nm, ref_val01, ref_val02, ref_val03, ref_val04, sort_ord, use_yn, reg_nm_id, reg_dtm)
+		VALUES(#{sys_scd}, #{tp_cd}, #{cd_id}, #{cd_nm}, #{ref_val01}, #{ref_val02}, #{ref_val03}, #{ref_val04}, #{sort_ord}, #{use_yn}, #{reg_nm_id}, NOW())
+	</insert>
+	
+	<!-- 공통코드 삭제 -->
+	<update id="codeDelete" parameterType="comm.CommVO">
+		UPDATE comm_cmncdm SET use_yn = 'N' WHERE sys_scd = #{sys_scd} AND tp_cd = #{tp_cd} AND cd_id = #{cd_id}
+	</update>
+	
+	<!-- 공통코드 수정 -->
+	<update id="codeUpdate" parameterType="comm.CommVO">
+		UPDATE comm_cmncdm SET cd_nm = #{cd_nm}, ref_val01 = #{ref_val01}, ref_val02 = #{ref_val02}, ref_val03 = #{ref_val03}
+	   							, ref_val04 = #{ref_val04}, sort_ord = #{sort_ord}, use_yn = #{use_yn}, lmnt_mn_id = #{reg_nm_id}, lmnt_dtm = NOW()
+		WHERE sys_scd = #{sys_scd} AND tp_cd = #{tp_cd} AND cd_id = #{cd_id}
+	</update>
+	
+	
+	
+	
+	<!-- 유형코드 조회 -->
+	<select id="codeSearch2" parameterType="comm.CommVO2" resultType="comm.CommVO2">
+		{ call SP_S_code_search2(#{sys_scd2}, #{searchKeyword2}, #{currentPerPage}, #{startIndex}) }
+	</select>
+	
+	<!-- 유형코드 cnt -->
+	<select id="codeCnt2" parameterType="comm.CommVO2" resultType="int">
+		{ call SP_S_code_search2_cnt(#{sys_scd2}, #{searchKeyword2}) }
+	</select>
+	
+	<!-- 유형코드 저장 -->
+	<insert id="codeInsert2" parameterType="comm.CommVO2">
+		INSERT INTO comm_cmncgm (sys_scd
+								, tp_cd, tp_nm
+								, sort_ord
+								, use_yn
+								, reg_mn_id
+								, reg_dtm
+								, ref_item1
+								, ref_item2
+								, ref_item3
+								, ref_item4)
+						VALUES (#{sys_scd2}
+								, #{tp_cd2}
+								, #{tp_nm2}
+								, #{sort_ord2}
+								, #{use_yn2}
+								, #{reg_mn_id2}
+								, NOW()
+								, #{ref_item12}
+								, #{ref_item22}
+								, #{ref_item32}
+								, #{ref_item42})
+	</insert>
+	
+	<!-- 유형코드 삭제 -->
+	<update id="codeDelete2" parameterType="comm.CommVO2">
+		UPDATE comm_cmncgm SET use_yn = 'N' WHERE sys_scd = #{sys_scd2} AND tp_cd = #{tp_cd2}
+	</update>
+	
+	<!-- 유형코드 수정 -->
+	<update id="codeUpdate2" parameterType="comm.CommVO">
+		UPDATE comm_cmncgm SET tp_nm = #{tp_nm2}, sort_ord = #{sort_ord2}, use_yn = #{use_yn2}, lmnt_mn_id = #{reg_mn_id2}
+							, lmnt_dtm = NOW(), ref_item1 = #{ref_item12}, ref_item2 = #{ref_item22}, ref_item3 = #{ref_item32}, ref_item4 = #{ref_item42}
+		WHERE sys_scd = #{sys_scd2} and tp_cd = #{tp_cd2}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:200,300,400,400i,500,500i,600,600i,700,700i');
+body {
+	font-family: 'IBM Plex Sans', sans-serif;
+	font-size: 13px;
+	line-height: 1.5;
+	color: #8392a5;
+	background-color: #fff;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+    color: #5d78ff;
+}
+
+pre {
+	max-height: 25rem;
+	overflow: auto;
+	width: 100%;
+	white-space: pre-wrap;
+}
+
+.slogan {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 14px;
+	line-height: 1.2;
+}
+
+.logo {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 7px;
+}
+
+.btn-purple {
+	background-color: #5D3C90;
+	color: #fff;
+}
+
+.btn-purple:hover {
+	background-color: #654598;
+	color: #fff;
+}
+
+.aside-header,
+.doc-section-footer {
+    height: 60px;
+    background: #5d78ff;
+    padding: 12px 36px;
+    color: #fff;	
+}
+
+.header {
+	height: 60px;
+}
+
+.aside-header .title {
+	line-height: 1.2;
+}
+
+.aside-header .toggle_button{
+    background: #fff;
+    color: #000!important;
+    padding: 10px;
+    margin-top: 5px;
+    border: none;
+}
+
+.menu-aside {
+	list-style: none;
+	padding: 0;
+	margin-top: 7px;
+}
+
+.menu-aside li a {
+    padding: 5px 10px;
+    display: block;
+    color: #8392a5;
+}
+
+.menu-aside .nav-link {
+    color: #596882;
+}
+
+.menu-aside li a:hover,
+.menu-aside li a {
+    border-left: 3px solid transparent;
+}
+
+.menu-aside li a:hover,
+.menu-aside li a.active {
+    color: #5d78ff;
+    font-weight: 500;
+    border-left: 3px solid #5d78ff;
+}
+
+
+.main-content {
+	padding: 15px;
+	margin-left: auto;
+	margin-right: auto
+}
+
+.aside-content {
+	overflow-y: auto;
+	height: 100%;
+    padding: 0 20px;
+}
+
+ul.list-circle {
+	list-style-type: circle;
+}
+
+.title-doc {
+	font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+.subtitle-doc {
+    font-size: 14px;
+    color: #999;
+    font-weight: 600;
+    display: inline-block;
+    padding-bottom: 5px;
+    /* text-transform: uppercase; */
+    margin-bottom: 25px;
+    /* margin-top: 45px; */
+}
+
+.subtitle-doc a {
+	padding-left: 10px;
+	color: #666;
+}
+
+.subtitle-doc a:hover {
+	color: blue;
+}
+
+.btn-getcode {
+	padding: 3px 7px;
+	font-size: 12px;
+	background-color: orange;
+	color: #fff;
+	float: right;
+}
+
+.aside-wrap {
+	background-color: #fff;
+	border-right: 1px solid rgba(0, 0, 0, .05);
+}
+
+.hljs{
+    background: #ffffff;
+}
+@media (min-width:768px) {
+	.aside-content {
+		display: block!important;
+	}
+	.aside-wrap {
+		position: -webkit-sticky;
+		position: sticky;
+		height: calc(100vh - 53px);
+		z-index: 1000;
+		top: 0;
+	}
+	.main-content {
+		padding: 60px;
+		max-width: 1280px;
+	}
+}

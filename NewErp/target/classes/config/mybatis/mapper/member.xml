@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+	<!-- 강사목록 조회 -->
+	<select id="teacherTabSearch" parameterType="member.MemberVO" resultType="member.MemberVO">
+		{ call SP_S_teacher_search(#{user_empl}, #{user_permit}, #{searchKeyWord}, #{part}, #{currentPerPage}, #{startIndex}) }
+	</select>
+	
+	<!-- 강사목록 조회 count -->
+	<select id="teacherCount" parameterType="member.MemberVO" resultType="int">
+		{ call SP_S_teacher_search_cnt(#{user_empl}, #{searchKeyWord}, #{part}, #{user_permit}) }
+	</select>
+	
+	<!-- 직원목록 조회 -->
+	<select id="emplTabSearch" parameterType="member.MemberVO" resultType="member.MemberVO">
+		SELECT a.*, b.cd_nm as part_nm
+			FROM member a LEFT JOIN comm_cmncdm b on a.part = b.cd_id
+			WHERE a.user_nm LIKE CONCAT('%', #{searchKeyWord}, '%') 
+			AND a.part LIKE CONCAT('%', #{partSearch}, '%') 
+			AND a.use_yn = 'Y' 
+			AND a.user_grp = 'A'
+			ORDER BY a.part, a.user_nm ASC LIMIT #{currentPerPage} OFFSET #{startIndex};
+	</select>
+	
+	<!-- 직원목록 조회 count -->
+	<select id="emplCount" parameterType="member.MemberVO" resultType="int">
+		SELECT count(*)
+			FROM member a LEFT JOIN comm_cmncdm b on a.part = b.cd_id
+			WHERE a.user_nm LIKE CONCAT('%', #{searchKeyWord}, '%') 
+			AND a.part LIKE CONCAT('%', #{partSearch}, '%') 
+			AND a.use_yn = 'Y' 
+			AND a.user_grp = 'A'
+	</select>
+	
+	<!-- 회원가입 화면 본지사 구하기 -->
+	<select id="selectCompany" resultType="comm.CommVO">
+		SELECT cd_id, cd_nm FROM comm_cmncdm WHERE sys_scd = '11' AND tp_cd = '2000'
+	</select>
+	
+	<!-- 아이디 중복체크 -->
+	<select id="idCheck" parameterType="member.MemberVO" resultType="int">
+		SELECT COUNT(*) FROM member WHERE user_id = #{user_id}
+	</select>
+	
+	<!-- 회원가입 담당자 검색 -->
+	<select id="emplSearch" parameterType="member.MemberVO" resultType="member.MemberVO">
+		SELECT user_id, user_nm, user_phone
+			FROM member 
+			WHERE use_yn = 'Y' 
+			AND user_grp = 'A' 
+			AND part = #{part}
+			AND user_nm LIKE CONCAT('%', #{user_nm}, '%')
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="memberInsert" parameterType="member.MemberVO">
+		INSERT INTO member(user_id, user_grp, use_yn, user_permit, user_pw, user_nm, user_age, user_email
+							, user_phone, reg_dtm, part, user_file, user_pict, user_empl)
+	    VALUES(#{user_id}
+	    	  , 'B'
+	    	  , 'Y'
+	    	  , 'B'
+	    	  , #{user_pw}
+	    	  , #{user_nm}
+	    	  , #{user_age}
+	    	  , #{user_email}
+	    	  , #{user_phone}
+	    	  , NOW()
+	    	  , #{part}
+	    	  , #{user_file}
+	    	  , #{user_pict}
+	    	  , #{user_empl}
+	    	  )
+	</insert>
+	
+	<!-- 직원정보저장 -->
+	<insert id="emplInsert" parameterType="member.MemberVO">
+		INSERT INTO member(user_id, user_grp, use_yn, user_permit, user_pw, user_nm, user_age, user_email
+							, user_phone, reg_dtm, part, user_pict)
+	    VALUES(#{user_id}
+	    	  , 'A'
+	    	  , 'Y'
+	    	  , 'A'
+	    	  , #{user_pw}
+	    	  , #{user_nm}
+	    	  , #{user_age}
+	    	  , #{user_email}
+	    	  , #{user_phone}
+	    	  , NOW()
+	    	  , #{part}
+	    	  , #{user_pict}
+	    	  )
+	</insert>
+	
+	<!-- 직원/강사 삭제 -->		
+	<update id="memberDel" parameterType="member.MemberVO">
+		UPDATE member SET use_yn = 'N' WHERE user_id = #{user_id}
+	</update>
+	
+	<!-- 직원정보 수정 -->		
+	<update id="emplUpdate" parameterType="member.MemberVO">
+		UPDATE member SET part = #{part}
+						 ,use_yn = #{use_yn}
+						 ,user_pw = #{user_pw}
+						 ,user_nm = #{user_nm}
+						 ,user_email = #{user_email}
+						 ,user_phone = #{user_phone}
+						 ,user_pict = #{user_pict}
+						WHERE user_id = #{user_id}
+	</update>
+	
+	<!-- 강사정보 수정 -->		
+	<update id="teacherUpdate" parameterType="member.MemberVO">
+		UPDATE member SET user_pw = #{user_pw},
+						  user_nm = #{user_nm},
+						  user_empl = #{user_empl},
+						  user_age = #{user_age},
+						  user_phone = #{user_phone},
+						  user_email = #{user_email},
+						  user_permit = #{user_permit},
+						  use_yn = #{use_yn},
+						  user_pict = #{user_pict}
+					WHERE user_id = #{user_id}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
