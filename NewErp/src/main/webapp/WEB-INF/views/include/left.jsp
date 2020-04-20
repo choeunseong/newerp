@@ -45,7 +45,7 @@
 	            <i class="accordion-icon fa fa-angle-left"></i></a>
             <ul class="sub-menu">
                <li><a href="javascript:;" onclick="fnMnuMove('member', 'studentForm')">원생등록</a></li>
-               <li><a href="javascript:;">원생목록</a></li>
+               <li><a href="javascript:;" onclick="fnMnuMove('member', 'student/studentList')">원생목록</a></li>
             </ul>
          </li>
          <li>

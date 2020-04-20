@@ -36,11 +36,12 @@
 	<beans:bean id="comm_daoBean" class="comm.CommController">
 		<!-- 컨트롤러를 생성하고, 생성자로 3번 xml에서 만든 dao 객체를 전달 -->
 		<beans:constructor-arg ref="comm_service"/>
-	</beans:bean>
+	</beans:bean> 
 	<!-- 원생관리 컨트롤러 -->
 	<beans:bean id="student_daoBean" class="student.StudentController">
 		<!-- 컨트롤러를 생성하고, 생성자로 3번 xml에서 만든 dao 객체를 전달 -->
 		<beans:constructor-arg ref="student_service"/>
+		<beans:constructor-arg ref="member_service"/>
 	</beans:bean>
 	
 	

@@ -52,19 +52,7 @@ public class MemberController {
 		
 		return mv;
 	}
-	
-	// 학생등록 화면 이동
-	@RequestMapping("/studentForm.do")
-	public ModelAndView studentForm() {
-		ModelAndView mv = new ModelAndView();
-		
-		List<CommVO> companyList = memberService.selectCompany();	// 본/지사 구하기
-		
-		mv.addObject("companyList", companyList);
-		mv.setViewName(MAIN_PATH + "student_form.jsp");
-		
-		return mv;
-	}
+
 	
 	/*
 	 * // 회원가입하기

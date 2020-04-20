@@ -27,3 +27,4 @@ function fnStuInsert(){
 		,complete :function(){}  //통신을 완료한후 처리
 	});
 }
+

@@ -44,6 +44,7 @@ function fnSearch2(){
 
 // 회원가입하기
 function fnSignUp(gubun, tab_gubun){
+	
 	var msg = "";
 	var form = "";
 	var url = "memberInsert.do";
@@ -57,6 +58,7 @@ function fnSignUp(gubun, tab_gubun){
 			url = "teacherUpdate.do";
 		}
 	}else if(gubun == 'sign'){
+		
 		msg = "가입";
 		form = $('#memberSignUpForm')[0];
 		
@@ -89,8 +91,6 @@ function fnSignUp(gubun, tab_gubun){
 			return;
 		}
 	}
-	alert(msg);
-	alert(url);
 	if(confirm(msg + "하시겠습니까?") == true){
 	    // Create an FormData object 
 	    var data = new FormData(form);
@@ -526,7 +526,20 @@ function fnDelete(tab_gubun){
 	}
 }
 
-
+// 유효성검사
+function emptyCheck(){
+	var val, regExp, regResult;
+	
+	val = $("#user_phone").val().trim();
+	regExp = /^\d{3}-\d{3,4}-\d{4}$/;
+	regResult = regExp.test(val);
+	if(!regResult && !isEmpty(val)){
+		if(!alert("잘못 된 휴대전화번호 입니다.")) $obj.focus();
+		return false;
+	}
+	
+	return true;
+}
 
 
 

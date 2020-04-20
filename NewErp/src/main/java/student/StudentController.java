@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,19 +14,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import comm.CommVO;
+import member.MemberService;
 
 @Controller
 public class StudentController {
 	
 	private StudentService studentService;
+	private MemberService memberService;
+	
 	public final String MAIN_PATH = "/WEB-INF/views/member/";
 	public final String MANA_PATH = "/WEB-INF/views/management/";
 	
 	public StudentController() {}
 	
-	public StudentController(StudentService studentService) {
+	public StudentController(StudentService studentService, MemberService memberService) {
 		super();
 		this.studentService = studentService;
+		this.memberService = memberService;
 	}
 
 	/*
@@ -34,6 +42,32 @@ public class StudentController {
 	 * 
 	 * return mv; }
 	 */
+	
+	// 학생등록 화면 이동
+	@RequestMapping("/studentForm.do")
+	public ModelAndView studentForm() {
+		ModelAndView mv = new ModelAndView();
+		
+		List<CommVO> companyList = memberService.selectCompany();	// 본/지사 구하기
+		
+		mv.addObject("companyList", companyList);
+		mv.setViewName(MAIN_PATH + "student_form.jsp");
+		
+		return mv;
+	}
+	
+	// 학생목록 화면 이동
+	@RequestMapping("/student/studentList.do")
+	public ModelAndView studentList() {
+		ModelAndView mv = new ModelAndView();
+		
+		List<CommVO> companyList = memberService.selectCompany();	// 본/지사 구하기
+		
+		mv.addObject("companyList", companyList);
+		mv.setViewName(MAIN_PATH + "student.jsp");
+		
+		return mv;
+	}
 	
 	// 원생등록
 	@RequestMapping(value = "/student/stuInsert.do", method = RequestMethod.POST)
@@ -88,7 +122,7 @@ public class StudentController {
 		
 		Calendar calendar = Calendar.getInstance();
 		fileName += calendar.get(Calendar.YEAR);
-		fileName += calendar.get(Calendar.MONTH);
+		fileName += calendar.get(Calendar.MONTH)+1;
 		fileName += calendar.get(Calendar.DATE);
 		fileName += calendar.get(Calendar.HOUR);
 		fileName += calendar.get(Calendar.MINUTE);
