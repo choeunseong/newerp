@@ -12,12 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import comm.CommVO;
 import member.MemberService;
+import paging.PagingVO;
 
 @Controller
 public class StudentController {
@@ -26,7 +28,6 @@ public class StudentController {
 	private MemberService memberService;
 	
 	public final String MAIN_PATH = "/WEB-INF/views/member/";
-	public final String MANA_PATH = "/WEB-INF/views/management/";
 	
 	public StudentController() {}
 	
@@ -76,13 +77,39 @@ public class StudentController {
 		Map map = new HashMap();
 		
 		String savePath = request.getRealPath("resources/member_files"); // 파일이 저장될 프로젝트 안의 폴더 경로
-//		System.out.println(vo.getFile_user_pict());
+		System.out.println(savePath);
 //		System.out.println("user_nm = " + vo.getUser_nm());
 		String user_pict 	= fileUpload( stuVO.getFile_stu_pict(), savePath );
 		
 		stuVO.setStu_pict(user_pict);
 		
 		int result = studentService.stuInsert(stuVO);
+		
+		if(result == 1) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "fail");
+		}
+		
+		return map;
+	}
+	
+	// 학생정보 수정
+	@RequestMapping(value = "/student/stuUpdate.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map stuUpdate(StudentVO stuVO, HttpServletRequest request) {
+		Map map = new HashMap();
+		
+		if(stuVO.getFile_stu_pict() != null) {
+			String savePath = request.getRealPath("resources/member_files"); // 파일이 저장될 프로젝트 안의 폴더 경로
+			System.out.println(savePath);
+	//		System.out.println("user_nm = " + vo.getUser_nm());
+			String user_pict 	= fileUpload( stuVO.getFile_stu_pict(), savePath );
+			
+			stuVO.setStu_pict(user_pict);
+		}
+		
+		int result = studentService.stuUpdate(stuVO);
 		
 		if(result == 1) {
 			map.put("result", "success");
@@ -145,5 +172,28 @@ public class StudentController {
 		
 	}
 //	================================파일업로드======================================
+	
+	
+	// 학생목록 리스트
+	@RequestMapping(value = "/student/stuSearchList.do", method = RequestMethod.POST)
+	public ModelAndView stuSearchList(StudentVO stuVo, @RequestParam(defaultValue = "1") int pageNo) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("111111111111 = " + stuVo.getPart());
+		int cnt = studentService.stuSearchListCnt(stuVo);
+		
+		PagingVO paging = new PagingVO(cnt, pageNo);
+		
+		stuVo.setStartIndex(paging.getStartIndex());
+		stuVo.setCurrentPerPage(paging.getPageSize());
+		
+		List<StudentVO> list = studentService.stuSearchList(stuVo);
+		
+		mv.addObject("list", list);
+		mv.addObject("cnt", cnt);
+		mv.addObject("paging", paging);
+		mv.setViewName(MAIN_PATH + "student_search.jsp");
+		
+		return mv;
+	}
 	
 }

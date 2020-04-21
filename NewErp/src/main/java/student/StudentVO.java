@@ -3,16 +3,23 @@ package student;
 import org.springframework.web.multipart.MultipartFile;
 
 public class StudentVO {
-	private int stu_idx;		// PK
-	private String part;		// 본지사ref
-	private String stu_empl;	// 담당직원id
-	private String stu_nm;		// 학생이름
-	private String stu_age;		// 학생나이
-	private String stu_phone;	// 학생전화번호
-	private String stu_email;	// 학생이메일
-	private String stu_pict;	// 학생사진	
+	private int stu_idx;			// PK
+	private String part;			// 본지사ref
+	private String stu_empl;		// 담당직원id
+	private String stu_nm;			// 학생이름
+	private String stu_age;			// 학생나이
+	private String stu_age_real;	// 학생나이
+	private String stu_phone;		// 학생전화번호
+	private String stu_email;		// 학생이메일
+	private String stu_pict;		// 학생사진	
 	private MultipartFile file_stu_pict; 	
-	private String use_yn;		// 사용여부
+	private String use_yn;			// 사용여부
+	private String bigo;			// 비고
+	private int startIndex = 1; 	// 페이징 시작 index(1페이지)
+	private int currentPerPage; 	// 한 페이지에 보여질 게시물 갯수
+	
+	private String user_nm;			// 담당강사명
+	private String cd_nm;			// 담당강사명
 	
 	
 	public int getStu_idx() {
@@ -75,9 +82,43 @@ public class StudentVO {
 	public void setFile_stu_pict(MultipartFile file_stu_pict) {
 		this.file_stu_pict = file_stu_pict;
 	}
+	public String getBigo() {
+		return bigo;
+	}
+	public void setBigo(String bigo) {
+		this.bigo = bigo;
+	}
+	public int getStartIndex() {
+		return startIndex;
+	}
+	public void setStartIndex(int startIndex) {
+		this.startIndex = startIndex;
+	}
+	public int getCurrentPerPage() {
+		return currentPerPage;
+	}
+	public void setCurrentPerPage(int currentPerPage) {
+		this.currentPerPage = currentPerPage;
+	}
+	public String getUser_nm() {
+		return user_nm;
+	}
+	public void setUser_nm(String user_nm) {
+		this.user_nm = user_nm;
+	}
+	public String getCd_nm() {
+		return cd_nm;
+	}
+	public void setCd_nm(String cd_nm) {
+		this.cd_nm = cd_nm;
+	}
+	public String getStu_age_real() {
+		return stu_age_real;
+	}
+	public void setStu_age_real(String stu_age_real) {
+		this.stu_age_real = stu_age_real;
+	}
 	
-	
-
 	
 }
 

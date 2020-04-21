@@ -4,6 +4,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="student">
 	
+	<select id="stuSearchList" parameterType="student.StudentVO" resultType="student.StudentVO">
+<!-- 		{ CALL SP_S_student_search(#{part}, #{stu_empl}, #{currentPerPage}, #{startIndex}) } -->
+		SELECT @rownum:=@rownum+1 AS rnum
+				, a.stu_idx
+				, a.part
+				, a.stu_empl
+				, a.stu_nm
+				, DATE_FORMAT(NOW(), '%Y') - CASE WHEN LEFT(a.stu_age, 2) > LEFT(DATE_FORMAT(NOW(), '%Y'), 2) THEN CONCAT('19', LEFT(a.stu_age, 2)) ELSE  CONCAT('20', LEFT(a.stu_age, 2)) END +1 AS stu_age_real
+				, a.stu_age
+				, a.stu_phone
+				, a.stu_email
+				, a.stu_pict
+				, a.use_yn
+				, a.bigo
+				, b.user_nm
+				, c.cd_nm
+				FROM student a LEFT JOIN member b ON a.stu_empl = b.user_id
+							   LEFT JOIN comm_cmncdm c ON a.part = c.cd_id, (SELECT @rownum:=0) TMP
+				WHERE 1=1
+				<if test="part != null and part != 'all'">AND a.part = #{part}</if>
+				<if test="stu_empl != null and stu_empl != ''">AND a.stu_empl = #{stu_empl}</if>
+				ORDER BY rnum ASC LIMIT #{currentPerPage} OFFSET #{startIndex}
+	</select>
+	
+	<select id="stuSearchListCnt" parameterType="student.StudentVO" resultType="int">
+		SELECT COUNT(a.stu_nm)
+					FROM student a LEFT JOIN member b ON a.stu_empl = b.user_id
+					WHERE 1=1
+					<if test="part != null and part != 'all'">AND a.part = #{part}</if>
+					<if test="stu_empl != null and stu_empl != ''">AND a.stu_empl = #{stu_empl}</if>
+	</select>
+	
 	<insert id="stuInsert" parameterType="student.StudentVO">
 		INSERT INTO student (stu_idx
 						    ,part

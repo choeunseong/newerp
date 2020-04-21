@@ -17,29 +17,30 @@
 		<table class="table table-striped table-responsive-sm" style="text-align: center;">
 			<thead>
 				<tr>
-					<th>업무구분</th>
-					<th>유형구분</th>
-					<th>코드</th>
-					<th>코드명</th>
-					<th>정렬순서</th>
-					<th>사용여부</th>
-					<th>수정자</th> 
-					<th>수정일시</th>
+					<th width="10%">본/지사</th>
+					<th width="20%">사진</th>
+					<th width="15%">이름</th>
+					<th width="15%">나이</th>
+					<th width="20%">전화번호</th>
+					<th width="15%">담당자</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="vo" items="${ list }" varStatus="status">
-					<tr onclick="fnInfoPush('${ vo.sys_scd }', '${ vo.cd_nm }', '${ vo.tp_cd }', '${ vo.tp_nm }', '${ vo.cd_id }'
-											, '${ vo.code_name }', '${ vo.ref_val01 }', '${ vo.ref_val02 }', '${ vo.ref_val03 }'
-											, '${ vo.ref_val04 }', '${ vo.sort_ord }', '${ vo.use_yn }')">
+					<tr onclick="fnStuDetail('${vo.part}', '${vo.stu_nm}', '${vo.stu_age}', '${vo.stu_phone}', '${vo.stu_email}', '${vo.stu_empl}', '${vo.bigo}', '${vo.use_yn}')">
 						<td>${ vo.cd_nm }</td>
-						<td>${ vo.tp_nm }</td>
-						<td>${ vo.cd_id }</td>
-						<td>${ vo.code_name }</td>
-						<td>${ vo.sort_ord }</td>
-						<td>${ vo.use_yn }</td>
-						<td>${ vo.lmnt_mn_id }</td>
-						<td>${ vo.lmnt_dtm }</td>
+						<td>
+							<c:if test="${ empty vo.stu_pict }">
+								없다
+							</c:if>
+							<c:if test="${ '' ne vo.stu_pict }">
+								<img src="${pageContext.request.contextPath}/resources/member_files/${ vo.stu_pict }" style="width: 95.28px; height: 125.16px;"/>
+							</c:if>
+						</td>
+						<td>${ vo.stu_nm }</td>
+						<td>${ vo.stu_age_real }세</td>
+						<td>${ vo.stu_phone }</td>
+						<td>${ vo.user_nm }</td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -1,5 +1,7 @@
 package student;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 public class StudentDAOImpl implements StudentDAO {
@@ -20,6 +22,24 @@ public class StudentDAOImpl implements StudentDAO {
 	@Override
 	public int stuInsert(StudentVO stuVO) {
 		return sqlSession.insert("student.stuInsert", stuVO);
+	}
+
+	// 학생목록 리스트
+	@Override
+	public List<StudentVO> stuSearchList(StudentVO stuVo) {
+		return sqlSession.selectList("student.stuSearchList", stuVo);
+	}
+
+	// 학생목록 리스트 cnt
+	@Override
+	public int stuSearchListCnt(StudentVO stuVo) {
+		return sqlSession.selectOne("student.stuSearchListCnt", stuVo);
+	}
+
+	// 학생정보 수정
+	@Override
+	public int stuUpdate(StudentVO stuVO) {
+		return sqlSession.update("student.stuUpdate", stuVO);
 	}
 	
 

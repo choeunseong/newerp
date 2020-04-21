@@ -36,12 +36,12 @@
 							${ vo.part_nm } 
 						</td>
 						<td>
-						<c:if test="${ empty vo.user_pict }">
-							없다
-						</c:if>
-						<c:if test="${ '' ne vo.user_pict }">
-							<img src="${pageContext.request.contextPath}/resources/member_files/${ vo.user_pict }" style="width: 95.28px; height: 125.16px;"/> 
-						</c:if>
+							<c:if test="${ empty vo.user_pict }">
+								없다
+							</c:if>
+							<c:if test="${ '' ne vo.user_pict }">
+								<img src="${pageContext.request.contextPath}/resources/member_files/${ vo.user_pict }" style="width: 95.28px; height: 125.16px;"/> 
+							</c:if>
 						</td>
 						<td>${ vo.user_id }</td>
 						<td>${ vo.user_nm }</td>
