@@ -1,6 +1,5 @@
 package comm;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -87,6 +86,13 @@ public class CommDAOImpl implements CommDAO {
 	public int codeUpdate2(CommVO2 vo2) {
 		return sqlSession.update("code.codeUpdate2", vo2);
 	}
+
+	// 해당 코드 가져오기 ex) 강의실, 강의과목 등등
+	@Override
+	public List<CommVO> codeSelect(Map map) {
+		return sqlSession.selectList("code.codeSelect", map);
+	}
+
 
 	
 }

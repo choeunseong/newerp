@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lesson">
+	
+	
+	
+	
+	<insert id="lessonInsert" parameterType="lesson.LessonVO">
+		INSERT INTO lesson (sub_ref
+						   ,ls_room
+						   ,teacher
+						   ,ls_nm
+						   ,st_date
+						   ,ed_date
+						   ,st_time
+						   ,ed_time
+						   ,st_application
+						   ,ed_application
+						   ,student_cnt
+						   ,use_yn
+						   ,wrt_dtm
+						   ,ls_registrant
+						   )
+					  VALUES (#{sub_ref}
+							 ,#{ls_room}
+							 ,#{teacher}
+							 ,#{ls_nm}
+							 ,#{st_date}
+							 ,#{ed_date}
+							 ,#{st_time}
+							 ,#{ed_time}
+							 ,#{st_application}
+							 ,#{ed_application}
+							 ,#{student_cnt}
+							 ,'Y'
+							 ,NOW()
+							 ,#{ls_registrant}
+							 )
+	</insert>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -49,13 +49,18 @@ function fnStuInsert(){
 }
 
 // 학생 상세보기
-function fnStuDetail(part, stu_nm, stu_age, stu_phone, stu_email, stu_empl, bigo, use_yn){
+function fnStuDetail(stu_idx, part, stu_nm, stu_age, stu_phone, stu_email, stu_empl, bigo, use_yn, user_nm){
+	$("#ori_part").val(part);
+	$("#stu_idx").val(stu_idx);
+	
 	$("#partSelect2").val(part).prop("selected", true);
 	$("#stu_nm").val(stu_nm);
 	$("#stu_age").val(stu_age);
 	$("#stu_phone").val(stu_phone);
 	$("#stu_email").val(stu_email);
-	$("#stuEmplSelect2").val(stu_empl).prop("selected", true);
+	$("#user_empl").val(user_nm);
+	$("#ori_user_empl").val(stu_empl);
+//	$("#stuEmplSelect2").val(stu_empl).prop("selected", true);
 	$("#bigo").val(bigo);
 	$("#stu_use_yn").val(use_yn).prop("checked", true);
 	
@@ -81,6 +86,8 @@ function fnStuInputClose(){
 	$("#modiBtn").prop("disabled", true);
 	$("#cancelBtn").prop("disabled", true);
 	$("#delBtn").prop("disabled", true);
+	
+	$("#stu_idx").val("");	// 학생 idx hidden값 지우기
 	
 	// input disabled비활성화
 	stuTable.find('td').find('input').prop("disabled", true);
@@ -121,6 +128,9 @@ function fnStuInputOpen(gubun){
 				stuTable.find('td').find('input').prop("disabled", true);
 				// select disabled활성화
 				stuTable.find('td').find('select').prop("disabled", true);
+				
+				fnStuInputClose();
+				fnStuSearch();
 			},
 			error : function(request, status, error){ //통신 에러시
 				alert("code : " +request.status + "\r\nmessage : " + request.reponseText);
@@ -131,10 +141,67 @@ function fnStuInputOpen(gubun){
 	}
 }
 
+// 본/지사별 담당자 불러오기
+function fnStuEmplSearch(gubun, val){
+	
+	$.ajax({
+		type : "POST", 
+		url : "student/emplSearch.do", 
+		dataType : "json",
+		data : {part : val},
+		success:function(data){ //통신 성공시 처리
+			var html = '<option value="">담당직원</option>';
+			
+			for(var i = 0; i < data.list.length; i++){
+				html += '<option value="' + data.list[i].user_id + '">' + data.list[i].user_nm + '</option>'
+//				console.log(html);
+			}
+			
+			
+			if(gubun == "search"){
+				$("#stuEmplSelect1").html(html);
+			}
+			
+		},
+		error : function(request, status, error){ //통신 에러시
+			alert("code : " +request.status + "\r\nmessage : " + request.reponseText);
+		}
+		,beforeSend:function(){} //통신을 시작할때 처리
+		,complete :function(){}  //통신을 완료한후 처리
+	});
+}
 
+// 수정창 본/지사 part hidden값 수정
+function fnPartChange(val){
+	$("#ori_part").val(val);
+}
 
-
-
+// 학생정보 삭제
+function fnStuDelete(){
+	var stu_idx = $("#stu_idx").val();
+	
+	if(confirm("해당 학생정보를 삭제하시겠습니까?") == true){
+		$.ajax({
+			type : "POST", 
+			url : "student/stuDelete.do", 
+			dataType : "json",
+			data : {stu_idx : stu_idx},
+			success:function(data){ //통신 성공시 처리
+				if(data.result == "success"){
+					alert("삭제되었습니다.");
+					fnStuSearch();
+				}else if(data.result == "fail"){
+					alert("삭제에 실패하였습니다.\n다시 시도해주세요.");
+				}
+			},
+			error : function(request, status, error){ //통신 에러시
+				alert("code : " +request.status + "\r\nmessage : " + request.reponseText);
+			}
+			,beforeSend:function(){} //통신을 시작할때 처리
+			,complete :function(){}  //통신을 완료한후 처리
+		});
+	}
+}
 
 
 

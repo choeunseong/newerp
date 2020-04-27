@@ -56,6 +56,15 @@
 	<bean id="student_service" class="student.StudentServiceImpl">
 		<property name="studentDAO" ref="student_dao"></property>
 	</bean>  
+	<!-- 수업관리 -->
+	<bean id="lesson_dao" class="lesson.LessonDAOImpl">
+		<!-- 2번 xml에서 만든 객체 주입 dept_dao.setSqlSession(sqlSessionBean); -->
+		<property name="sqlSession" ref="sqlSessionBean"></property>
+	</bean>
+	
+	<bean id="lesson_service" class="lesson.LessonServiceImpl">
+		<property name="lessonDAO" ref="lesson_dao"></property>
+	</bean>   
 	
 </beans>
 

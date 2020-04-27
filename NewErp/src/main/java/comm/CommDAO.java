@@ -1,6 +1,7 @@
 package comm;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CommDAO {
 
@@ -22,6 +23,8 @@ public interface CommDAO {
 	int codeInsert2(CommVO2 vo2);			// 유형코드 저장
 	int codeDelete2(CommVO2 vo2);			// 유형코드 삭제
 	int codeUpdate2(CommVO2 vo2);			// 유형코드 수정
+	
+	List<CommVO> codeSelect(Map map);	// 해당 코드 가져오기 ex) 강의실, 강의과목 등등
 	
 	
 

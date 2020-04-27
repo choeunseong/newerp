@@ -41,6 +41,12 @@ public class StudentDAOImpl implements StudentDAO {
 	public int stuUpdate(StudentVO stuVO) {
 		return sqlSession.update("student.stuUpdate", stuVO);
 	}
+
+	// 학생정보 삭제
+	@Override
+	public int stuDelete(StudentVO stuVo) {
+		return sqlSession.update("student.stuDelete", stuVo);
+	}
 	
 
 

@@ -11,6 +11,8 @@ public interface StudentDAO {
 
 	int stuUpdate(StudentVO stuVO);	// 학생정보 수정
 
+	int stuDelete(StudentVO stuVo);	// 학생정보 삭제
+
 
 
 

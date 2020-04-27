@@ -1,6 +1,8 @@
 package comm;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CommServiceImpl implements CommService {
 	private CommDAO commDAO;
@@ -72,6 +74,17 @@ public class CommServiceImpl implements CommService {
 	@Override
 	public int CodeUpdate2(CommVO2 vo2) {
 		return commDAO.codeUpdate2(vo2);
+	}
+
+	// 해당 코드 가져오기 ex) 강의실, 강의과목 등등
+	@Override
+	public List<CommVO> codeSelect(String sys_scd, String tp_cd) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("sys_scd", sys_scd);
+		map.put("tp_cd", tp_cd);
+		
+		return commDAO.codeSelect(map);
 	} 
 
 

@@ -89,6 +89,12 @@ public class MemberServiceImpl implements MemberService {
 	public int teacherUpdate(MemberVO vo) {
 		return memberDAO.teacherUpdate(vo);
 	}
+
+	// Layer 강사검색
+	@Override
+	public List<MemberVO> teacherLayerSearch(MemberVO memberVo) {
+		return memberDAO.teacherLayerSearch(memberVo);
+	}
 	
 	
 	

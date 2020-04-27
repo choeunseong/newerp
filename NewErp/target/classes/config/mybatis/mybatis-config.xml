@@ -19,5 +19,7 @@
 		<mapper resource="config/mybatis/mapper/code.xml"/>
 		<mapper resource="config/mybatis/mapper/member.xml"/>
 		<mapper resource="config/mybatis/mapper/student.xml"/>
+		<mapper resource="config/mybatis/mapper/lesson.xml"/>
+		
 	</mappers>
 </configuration>

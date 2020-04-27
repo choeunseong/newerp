@@ -42,7 +42,7 @@
 		<div class="tab-pane fade active show" id="code_tab1">
 		
 			<div class="col-md-12 col-lg-12">
-				<div class="card mg-b-20">
+				<div class="card mg-b-20 pd-b-20">
 						<!-- <h4 class="card-header-title">
 							공통코드입력
 						</h4> -->

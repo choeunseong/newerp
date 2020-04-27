@@ -29,6 +29,8 @@ public interface MemberDAO {
 	
 	int teacherUpdate(MemberVO vo);	// 강사정보 수정
 	
+	List<MemberVO> teacherLayerSearch(MemberVO memberVo);	// Layer 강사검색
+	
 
 
 

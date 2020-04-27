@@ -48,7 +48,19 @@
 						<td>${ vo.user_nm }</td>
 						<td>${ vo.user_phone }</td>
 						<td>${ vo.user_email }</td>
-						<td>${ vo.user_permit }</td>
+						<td>
+							<c:choose>
+								<c:when test="${ vo.user_permit == 'A' }">
+									<p style="color: #218838">승인</p>
+								</c:when>
+								<c:when test="${ vo.user_permit == 'B' }">
+									<p style="color: #5d78ff">대기</p>
+								</c:when>
+								<c:when test="${ vo.user_permit == 'C' }">
+									<p style="color: #e87c87">거부</p>
+								</c:when>
+							</c:choose>
+						</td>
 						<td>${ vo.user_empl }</td>
 					</tr>
 				</c:forEach>

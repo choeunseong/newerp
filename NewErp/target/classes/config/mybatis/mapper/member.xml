@@ -51,6 +51,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE use_yn = 'Y' 
 			AND user_grp = 'A' 
 			AND part = #{part}
+			<if test="user_nm != null">AND user_nm LIKE CONCAT('%', #{user_nm}, '%')</if>
+	</select>
+	
+	<!-- Layer 강사검색 -->
+	<select id="teacherLayerSearch" parameterType="member.MemberVO" resultType="member.MemberVO">
+		SELECT user_id, user_nm, user_phone
+			FROM member
+			WHERE user_grp = 'B'
+			AND use_yn = 'Y'
+			AND part = #{part}
 			AND user_nm LIKE CONCAT('%', #{user_nm}, '%')
 	</select>
 	

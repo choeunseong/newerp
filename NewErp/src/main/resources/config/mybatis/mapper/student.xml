@@ -4,6 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="student">
 	
+	<!-- 학생목록 조회 -->
 	<select id="stuSearchList" parameterType="student.StudentVO" resultType="student.StudentVO">
 <!-- 		{ CALL SP_S_student_search(#{part}, #{stu_empl}, #{currentPerPage}, #{startIndex}) } -->
 		SELECT @rownum:=@rownum+1 AS rnum
@@ -25,17 +26,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				WHERE 1=1
 				<if test="part != null and part != 'all'">AND a.part = #{part}</if>
 				<if test="stu_empl != null and stu_empl != ''">AND a.stu_empl = #{stu_empl}</if>
+				AND a.use_yn = 'Y'
 				ORDER BY rnum ASC LIMIT #{currentPerPage} OFFSET #{startIndex}
 	</select>
 	
+	<!-- 학생목록 count -->
 	<select id="stuSearchListCnt" parameterType="student.StudentVO" resultType="int">
 		SELECT COUNT(a.stu_nm)
 					FROM student a LEFT JOIN member b ON a.stu_empl = b.user_id
 					WHERE 1=1
 					<if test="part != null and part != 'all'">AND a.part = #{part}</if>
 					<if test="stu_empl != null and stu_empl != ''">AND a.stu_empl = #{stu_empl}</if>
+				AND a.use_yn = 'Y'
 	</select>
 	
+	<!-- 학생정보 등록 -->
 	<insert id="stuInsert" parameterType="student.StudentVO">
 		INSERT INTO student (stu_idx
 						    ,part
@@ -58,6 +63,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					  	  ,'Y'
 					  	  )
 	</insert>
+	
+	<!-- 학생정보 수정 -->
+	<update id="stuUpdate" parameterType="student.StudentVO">
+		UPDATE student SET part = #{part}
+						 , stu_nm = #{stu_nm}
+						 , stu_age = #{stu_age}
+						 , stu_phone = #{stu_phone}
+						 , stu_email = #{stu_email}
+						 , stu_empl = #{stu_empl}
+						 <if test="stu_pict != null">, stu_pict = #{stu_pict}</if>
+						 , use_yn = #{use_yn}
+						 , bigo = #{bigo}
+					WHERE stu_idx = #{stu_idx}
+				
+	</update>
+	
+	<update id="stuDelete" parameterType="student.StudentVO">
+		UPDATE student SET use_yn = 'N'
+			WHERE stu_idx = #{stu_idx}
+	</update>
 	
 </mapper>
 

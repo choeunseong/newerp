@@ -98,6 +98,12 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.insert("member.teacherUpdate", vo);
 	}
 
+	// Layer 강사검색
+	@Override
+	public List<MemberVO> teacherLayerSearch(MemberVO memberVo) {
+		return sqlSession.selectList("member.teacherLayerSearch", memberVo);
+	}
+
 
 	
 }

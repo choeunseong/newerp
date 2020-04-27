@@ -4,6 +4,10 @@
 <script src="${pageContext.request.contextPath}/resources/js/code.js"></script>
 <script>
 	fnStuSearch();
+	
+	$(document).ready(function(){
+		
+	});
 </script>
 
 <div class="pageheader pd-t-25 pd-b-35 pd-l-15">
@@ -28,17 +32,17 @@
 
 		
 <div class="col-md-12 col-lg-12">
-	<div class="card mg-b-20">
+	<div class="card mg-b-20 pd-b-20">
 		
 		
 		<div class="card-body collapse show" id="collapse9">
 			<form id="studentSearchForm" name="studentSearchForm">
-				<input type="hidden" id="curPage" name="curPage" value="1">
+				<input type="hidden" id="pageNo" name="pageNo" value="1">
 				
 				<div class="parsley-input col-md-12" style="margin-left:0.5%">
 					<div class="input-group">
 						<div class="col-md-8 row">
-							<select class="form-control select2 col-md-2" id="partSelect1" name="part" onchange="fnEmplSearch(this.value)">
+							<select class="form-control select2 col-md-2" id="partSelect1" name="part" onchange="fnStuEmplSearch('search', this.value)">
 								<option value="all">본/지사</option>
 								<c:forEach var="company" items="${ companyList }">
 									<option value="${ company.cd_id }">${ company.cd_nm }</option>
@@ -64,16 +68,16 @@
 				<div class="card-body collapse show" id="collapse1" style="margin-bottom:-5%;">
 					<form id="studentForm" name="studentForm">
 						<input type="hidden" id="reg_nm_id" name="reg_nm_id" value="${ sessionScope.user.user_id }">
-						<input type="hidden" id="use_yn" name="use_yn" value="Y">
+						<input type="hidden" id="stu_idx" name="stu_idx" value="">
 						<input type="hidden" id="pageNo" name="pageNo" value="1">
-						<input type="hidden" id="status" name="status" value="">
+						<input type="hidden" id="ori_part" name="part" value="">
 						<table class="table table-bordered tx-12 tx-gray-700 bd" id="stuDetailTable">
 							<tr style="text-align: center">
 								<td width="10%" class="bg-gray-100 tx-11 tx-uppercase tx-gray-800 bd">
 									본/지사
 								</td>
 								<td width="15%" class="">
-									<select class="form-control select2 col-md-12" id="partSelect2" name="part" onchange="fnTypeSearch('partSelect2', this.value)" disabled>
+									<select class="form-control select2 col-md-12" id="partSelect2" onchange="fnPartChange(this.value)" disabled>
 										<option value="">본/지사</option> 
 										<c:forEach var="company" items="${ companyList }">
 											<option value="${ company.cd_id }">${ company.cd_nm }</option>
@@ -110,9 +114,20 @@
 									담당자
 								</td>
 								<td  class="">
-									<select class="form-control select2" id="stuEmplSelect2" name="stu_empl" disabled>
-										<option value="">담당직원</option>
-									</select>
+<!-- 									<select class="form-control select2" id="stuEmplSelect2" name="stu_empl" disabled> -->
+<!-- 										<option value="">담당직원</option> -->
+<!-- 									</select> -->
+									<div class="input-group">
+										<input type="text" class="form-control" id="user_empl" value="" disabled>
+										<input type="hidden" id="ori_user_empl" name="stu_empl" value="">
+										<div class="input-group-prepend">
+											<a href="javascript:;" class="input-group-text" onclick="fnEmplSearchOpen('stuInput')" title="담당자 검색">
+												<span>
+													<i class="fa fa-search"></i>
+												</span>
+											</a>
+										</div>
+									</div>
 								</td>
 								<td class="bg-gray-100 tx-11 tx-uppercase tx-gray-800 bd">
 									사진

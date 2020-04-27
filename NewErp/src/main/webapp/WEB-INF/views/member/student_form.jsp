@@ -15,20 +15,14 @@
 	
 </script>
 
-<div class="card shadow-none pd-20 mx-auto wd-900 bd-1 align-self-center">
+<div class="card shadow-none pd-20 mx-auto wd-900 bd-1 align-self-center mg-b-80 mg-t-80">
 	<h4 class="card-title mt-3 text-center">학생 등록</h4>
 	<p class="text-center">학생정보를 입력해주세요.</p>
 	<div class="card mg-b-20">
 		<div class="card-header">
-		<h4 class="card-header-title">
-			학생정보등록(<span class="tx-danger"> *</span> 표시는 필수 입력사항 입니다.)
-		</h4>
-		<div class="card-header-btn">
-			<a href="" data-toggle="collapse" class="btn card-collapse" data-target="#collapse4" aria-expanded="true"><i class="ion-ios-arrow-down"></i></a>
-			<!-- <a href="" data-toggle="refresh" class="btn card-refresh"><i class="ion-android-refresh"></i></a>
-			<a href="" data-toggle="expand" class="btn card-expand"><i class="ion-android-expand"></i></a>
-			<a href="" data-toggle="remove" class="btn card-remove"><i class="ion-android-close"></i></a> -->
-		</div>
+			<h4 class="card-header-title">
+				학생정보등록(<span class="tx-danger"> *</span> 표시는 필수 입력사항 입니다.)
+			</h4>
 		</div>
 		<div class="card-body collapse show" id="collapse7">
 			<form id="stuSignUpForm" name="stuSignUpForm" method="post" enctype="multipart/form-data">

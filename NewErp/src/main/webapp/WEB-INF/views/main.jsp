@@ -52,7 +52,7 @@
       <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/plugins/simple-line-icons/css/simple-line-icons.css">
       <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/plugins/ionicons/css/ionicons.css">
       <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/plugins/toastr/toastr.min.css">
-      <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/plugins/apex-chart/apexcharts.css">
+<%--       <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/plugins/apex-chart/apexcharts.css"> --%>
       <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/app.min.css"/>
       <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/style.min.css"/>
       <!-- Favicon -->	
@@ -63,9 +63,15 @@
       <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
+      
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
       <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
       <script src="${pageContext.request.contextPath}/resources/js/member.js"></script>
       <script src="${pageContext.request.contextPath}/resources/js/student.js"></script>
+      <script src="${pageContext.request.contextPath}/resources/js/lesson.js"></script>
       
       <style>
 		.indexPop {
@@ -96,8 +102,8 @@
 		}
 	</style>
       
-   </head>
-   <body>
+  </head>
+  <body>
    <div class="indexPop" id="mainLayer"></div>
    
    	<input type="hidden" id="empl_id" value="${ sessionScope.user.user_id }">
@@ -151,7 +157,7 @@
 		<script src="${pageContext.request.contextPath}/resources/assets/plugins/countup/counterup.min.js"></script>		
 		<script src="${pageContext.request.contextPath}/resources/assets/plugins/waypoints/waypoints.min.js"></script>	  
 		<script src="${pageContext.request.contextPath}/resources/assets/plugins/apex-chart/apexcharts.min.js"></script>	  
-		<script src="${pageContext.request.contextPath}/resources/assets/plugins/apex-chart/apex-sample.min.js"></script>
+<%-- 		<script src="${pageContext.request.contextPath}/resources/assets/plugins/apex-chart/apex-sample.min.js"></script> --%>
 		<script src="${pageContext.request.contextPath}/resources/assets/plugins/simpler-sidebar/jquery.simpler-sidebar.min.js"></script>	  
 		<script src="${pageContext.request.contextPath}/resources/assets/js/dashboard/helpdesk-dashboard-init.js"></script>		  
 		<script src="${pageContext.request.contextPath}/resources/assets/js/jquery.slimscroll.min.js"></script>

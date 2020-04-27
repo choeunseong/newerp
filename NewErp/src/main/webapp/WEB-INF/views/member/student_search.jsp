@@ -27,7 +27,7 @@
 			</thead>
 			<tbody>
 				<c:forEach var="vo" items="${ list }" varStatus="status">
-					<tr onclick="fnStuDetail('${vo.part}', '${vo.stu_nm}', '${vo.stu_age}', '${vo.stu_phone}', '${vo.stu_email}', '${vo.stu_empl}', '${vo.bigo}', '${vo.use_yn}')">
+					<tr onclick="fnStuDetail('${vo.stu_idx}', '${vo.part}', '${vo.stu_nm}', '${vo.stu_age}', '${vo.stu_phone}', '${vo.stu_email}', '${vo.stu_empl}', '${vo.bigo}', '${vo.use_yn}', '${vo.user_nm}')">
 						<td>${ vo.cd_nm }</td>
 						<td>
 							<c:if test="${ empty vo.stu_pict }">

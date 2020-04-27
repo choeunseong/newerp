@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import comm.CommVO;
 import member.MemberService;
+import member.MemberVO;
 import paging.PagingVO;
 
 @Controller
@@ -194,6 +196,36 @@ public class StudentController {
 		mv.setViewName(MAIN_PATH + "student_search.jsp");
 		
 		return mv;
+	}
+	
+	// 본/지사별 담당자 검색
+	@RequestMapping(value = "student/emplSearch.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map emplSearch(MemberVO vo, Model model) {
+		Map map = new HashMap();
+		
+		List<MemberVO> list = memberService.emplSearch(vo);
+		
+		map.put("list", list);
+		
+		return map;
+	}
+	
+	// 학생정보 삭제
+	@RequestMapping(value = "student/stuDelete.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map stuDelete(StudentVO stuVo) {
+		Map map = new HashMap();
+		
+		int result = studentService.stuDelete(stuVo);
+		
+		if(result == 1) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "fail");
+		}
+		
+		return map;
 	}
 	
 }

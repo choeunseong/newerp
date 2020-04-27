@@ -5,6 +5,13 @@
 <script src="${pageContext.request.contextPath}/resources/js/member.js"></script>
 
 <script>
+	$(document).ready(function(){
+		$(".permit_check").click(function(){
+			$(".permit_check").prop("checked", false);
+			$(this).prop("checked", true);
+		});
+	});
+
 	fnSearch();
 	fnSearch2();
 </script>
@@ -35,7 +42,7 @@
 		<div class="tab-pane fade active show" id="empl_tab">
 		
 			<div class="col-md-12 col-lg-12">
-				<div class="card mg-b-20">
+				<div class="card mg-b-20 pd-b-20">
 						<!-- <h4 class="card-header-title">
 							공통코드입력
 						</h4> -->
@@ -179,8 +186,8 @@
 		<div class="tab-pane fade" id="teacher_tab">
 		
 			<div class="col-md-12 col-lg-12">
-				<div class="card mg-b-20">
-						<!-- <h4 class="card-header-title">
+				<div class="card mg-b-20 pd-b-20">
+						<!-- <h4 class="card-header-title"> 
 							유형코드입력
 						</h4> -->
 						<!-- <div class="card-header-btn">
@@ -289,19 +296,19 @@
 												<div class="row">
 													<div class="col-md-4">
 														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" id="permit_checkA" name="user_permit" value="A" disabled>
+															<input type="checkbox" class="custom-control-input permit_check" id="permit_checkA" name="user_permit" value="A" disabled>
 															<label class="custom-control-label" for="permit_checkA">승인</label>
 														</div>
 													</div>
 													<div class="col-md-4">
 														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" id="permit_checkB" name="user_permit" value="B" disabled>
+															<input type="checkbox" class="custom-control-input permit_check" id="permit_checkB" name="user_permit" value="B" disabled>
 															<label class="custom-control-label" for="permit_checkB">대기</label>
 														</div>
 													</div>
 													<div class="col-md-4">
 														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" id="permit_checkC" name="user_permit" value="C" disabled>
+															<input type="checkbox" class="custom-control-input permit_check" id="permit_checkC" name="user_permit" value="C" disabled>
 															<label class="custom-control-label" for="permit_checkC">거부</label>
 														</div>
 													</div>

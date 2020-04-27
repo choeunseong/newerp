@@ -22,7 +22,8 @@ public interface CommService {
 	int CodeInsert2(CommVO2 vo2);				// 유형코드 저장
 	int CodeDelete2(CommVO2 vo2);				// 유형코드 삭제
 	int CodeUpdate2(CommVO2 vo2);				// 유형코드 수정
-
+	
+	List<CommVO> codeSelect(String sys_scd, String tp_cd);	// 해당 코드 가져오기 ex) 강의실, 강의과목 등등
 
 
 	

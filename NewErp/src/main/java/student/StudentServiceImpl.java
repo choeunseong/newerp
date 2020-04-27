@@ -32,6 +32,12 @@ public class StudentServiceImpl implements StudentService {
 	public int stuUpdate(StudentVO stuVO) {
 		return studentDAO.stuUpdate(stuVO);
 	}
+
+	// 학생정보 삭제
+	@Override
+	public int stuDelete(StudentVO stuVo) {
+		return studentDAO.stuDelete(stuVo);
+	}
 	
 	
 	

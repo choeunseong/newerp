@@ -52,7 +52,7 @@
             <a href=""><i data-feather="grid"></i>
             <span>수업</span><i class="accordion-icon fa fa-angle-left"></i></a>
             <ul class="sub-menu">
-               <li><a href="javascript:;">강의등록 </a></li>
+               <li><a href="javascript:;" onclick="fnMnuMove('lesson', 'lesson/lessonForm')">강의등록 </a></li>
                <li><a href="javascript:;">강의정보</a></li>
                <li><a href="javascript:;">시간표</a></li>
                <li><a href="javascript:;">출석부</a></li>

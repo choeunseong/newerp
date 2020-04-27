@@ -164,21 +164,31 @@ function fnIdCheck(){
 
 // 담당자검색 layer열기
 function fnEmplSearchOpen(gubun){
-	if($("#part").val() == ""){
-		alert("본/지사를 선택해 주세요.");
-		return;
-	}
-	
 	var part = "";	
 	
-	if(gubun == "member"){
-		part = $("#emplSearchKey").val();	// 강사 회원가입일 때
-		$("#indexLayer").show();	
-	}else if(gubun == "student"){
-		part = $("#emplSearchKey1").val();	// 학생등록일 때
+	if(gubun != "stuInput"){
+		if($("#part").val() == ""){
+			alert("본/지사를 선택해 주세요.");
+			return;
+		}
+		
+		
+		if(gubun == "member"){
+			part = $("#emplSearchKey").val();	// 강사 회원가입일 때
+			$("#indexLayer").show();	
+		}else if(gubun == "student"){
+			part = $("#emplSearchKey1").val();	// 학생등록일 때
+			$("#mainLayer").show();
+		}
+	}else{
+		if($("#partSelect2").val() == ""){
+			alert("본/지사를 선택해 주세요.");
+			return;
+		}
+		
+		part = $("#ori_part").val();
 		$("#mainLayer").show();
 	}
-	
 	
 	$.ajax({
 		type : "POST", 
@@ -188,7 +198,7 @@ function fnEmplSearchOpen(gubun){
 		success:function(data){ //통신 성공시 처리
 			if(gubun == "member"){
 				$("#indexLayer").html(data);
-			}else if(gubun == "student"){
+			}else if(gubun == "student" || gubun == "stuInput"){
 				$("#mainLayer").html(data);
 			}
 		},

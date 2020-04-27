@@ -90,6 +90,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 							, lmnt_dtm = NOW(), ref_item1 = #{ref_item12}, ref_item2 = #{ref_item22}, ref_item3 = #{ref_item32}, ref_item4 = #{ref_item42}
 		WHERE sys_scd = #{sys_scd2} and tp_cd = #{tp_cd2}
 	</update>
+	
+	<!-- 해당 코드 가져오기 -->
+	<select id="codeSelect" parameterType="java.util.HashMap" resultType="comm.CommVO">
+		SELECT cd_id, cd_nm
+			FROM comm_cmncdm
+			WHERE sys_scd = #{sys_scd}
+			AND tp_cd = #{tp_cd}
+			AND use_yn = 'Y'
+			ORDER BY cd_id
+	</select>
+	
 </mapper>
 
 

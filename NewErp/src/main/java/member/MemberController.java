@@ -252,7 +252,7 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		
 		mv.addObject("part", part);
-		mv.setViewName(MAIN_PATH + "empl.jsp");
+		mv.setViewName("/WEB-INF/views/comm/empl.jsp");
 		
 		return mv;
 	}
@@ -266,7 +266,7 @@ public class MemberController {
 		List<MemberVO> list = memberService.emplSearch(vo);
 		
 		mv.addObject("list", list);
-		mv.setViewName(MAIN_PATH + "empl_search.jsp");
+		mv.setViewName("/WEB-INF/views/comm/empl_search.jsp");
 		
 		return mv;
 	}
